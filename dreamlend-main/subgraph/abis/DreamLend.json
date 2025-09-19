@@ -1,0 +1,57 @@
+[
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "name": "loanId",           "type": "uint256" },
+      { "indexed": true,  "name": "lender",           "type": "address" },
+      { "indexed": false, "name": "asset",            "type": "address" },
+      { "indexed": false, "name": "amount",           "type": "uint256" },
+      { "indexed": false, "name": "collateralAsset",  "type": "address" },
+      { "indexed": false, "name": "collateralAmount", "type": "uint256" },
+      { "indexed": false, "name": "aprBps",           "type": "uint256" },
+      { "indexed": false, "name": "duration",         "type": "uint256" }
+    ],
+    "name": "LoanOffered",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "name": "loanId",   "type": "uint256" },
+      { "indexed": true,  "name": "lender",   "type": "address" },
+      { "indexed": true,  "name": "borrower", "type": "address" },
+      { "indexed": false, "name": "amount",   "type": "uint256" }
+    ],
+    "name": "LoanAccepted",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "name": "loanId", "type": "uint256" },
+      { "indexed": true,  "name": "payer",  "type": "address" },
+      { "indexed": false, "name": "amount", "type": "uint256" }
+    ],
+    "name": "LoanRepaid",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "name": "loanId", "type": "uint256" },
+      { "indexed": true,  "name": "lender", "type": "address" }
+    ],
+    "name": "LoanCancelled",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true,  "name": "loanId",     "type": "uint256" },
+      { "indexed": true,  "name": "liquidator", "type": "address" },
+      { "indexed": true,  "name": "lender",     "type": "address" }
+    ],
+    "name": "LoanLiquidated",
+    "type": "event"
+  }
+]

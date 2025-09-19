@@ -1,0 +1,32 @@
+services:
+  ipfs:
+    image: ipfs/go-ipfs:v0.12.2
+    ports: ["5001:5001"]
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: graph
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: graph
+      POSTGRES_INITDB_ARGS: "--lc-collate=C --lc-ctype=C"
+      LANG: C
+      LC_ALL: C
+    ports: ["5432:5432"]
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  graph-node:
+    image: graphprotocol/graph-node:v0.34.0
+    depends_on: [ipfs, postgres]
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+    environment:
+      postgres_host: postgres
+      postgres_user: graph
+      postgres_pass: postgres
+      postgres_db: graph
+      ipfs: "ipfs:5001"
+      ethereum: "somnia:https://dream-rpc.somnia.network"
+      GRAPH_LOG: info

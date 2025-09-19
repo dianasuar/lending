@@ -1,0 +1,35 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  - kind: ethereum
+    name: DreamLend
+    network: somnia
+    source:
+      address: "0xddDa4e2B1B8E6f06086F103dA6358E7aCbd020ec"
+      abi: DreamLend
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Account
+        - Loan
+        - Repayment
+      abis:
+        - name: DreamLend
+          file: ./abis/DreamLend.json
+      eventHandlers:
+        - event: "LoanOffered(uint256,address,address,uint256,address,uint256,uint256)"
+          handler: handleLoanOffered
+        - event: "LoanAccepted(uint256,address,address,uint256)"
+          handler: handleLoanAccepted
+        - event: "LoanRepaid(uint256,address,uint256)"
+          handler: handleLoanRepaid
+        - event: "LoanCancelled(uint256,address)"
+          handler: handleLoanCancelled
+        - event: "LoanLiquidated(uint256,address,address)"
+          handler: handleLoanLiquidated
+      file: ./src/mapping.ts    

@@ -1,0 +1,30 @@
+type Account @entity(immutable: false) {
+  id: ID!
+  loansOffered: [Loan!]! @derivedFrom(field: "lender")
+  loansTaken: [Loan!]! @derivedFrom(field: "borrower")
+}
+
+enum LoanStatus { Pending Accepted Repaid Cancelled Liquidated }
+
+type Loan @entity(immutable: false) {
+  id: ID!
+  lender: Account!
+  borrower: Account
+  token: Bytes!
+  principal: BigInt!
+  collateralToken: Bytes!
+  collateralAmount: BigInt!
+  aprBps: BigInt!
+  duration: BigInt!
+  startTimestamp: BigInt
+  status: LoanStatus!
+  repayments: [Repayment!]! @derivedFrom(field: "loan")
+}
+
+type Repayment @entity(immutable: false) {
+  id: ID!
+  loan: Loan!
+  payer: Account!
+  amount: BigInt!
+  timestamp: BigInt!
+}
